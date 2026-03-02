@@ -40,21 +40,12 @@ abstract class AbstractStorageReader implements StorageReaderInterface
      */
     protected $tableNameResolver;
 
-    /**
-     * @param \Spryker\Client\StorageDatabase\Connection\ConnectionProviderInterface $connectionProvider
-     * @param \Spryker\Client\StorageDatabase\StorageTableNameResolver\StorageTableNameResolverInterface $tableNameResolver
-     */
     public function __construct(ConnectionProviderInterface $connectionProvider, StorageTableNameResolverInterface $tableNameResolver)
     {
         $this->connectionProvider = $connectionProvider;
         $this->tableNameResolver = $tableNameResolver;
     }
 
-    /**
-     * @param string $resourceKey
-     *
-     * @return string
-     */
     public function get(string $resourceKey): string
     {
         $statement = $this->createSingleSelectStatementForResourceKey($resourceKey);
@@ -95,11 +86,6 @@ abstract class AbstractStorageReader implements StorageReaderInterface
         return $statement;
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\StatementInterface $statement
-     *
-     * @return string
-     */
     protected function fetchSingleResult(StatementInterface $statement): string
     {
         $result = $statement->fetch();
@@ -136,19 +122,11 @@ abstract class AbstractStorageReader implements StorageReaderInterface
         return $formattedResults;
     }
 
-    /**
-     * @return \Propel\Runtime\Connection\ConnectionInterface
-     */
     protected function getConnection(): ConnectionInterface
     {
         return $this->connectionProvider->getConnection();
     }
 
-    /**
-     * @param string $resourceKey
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     abstract protected function createSingleSelectStatementForResourceKey(string $resourceKey): StatementInterface;
 
     /**

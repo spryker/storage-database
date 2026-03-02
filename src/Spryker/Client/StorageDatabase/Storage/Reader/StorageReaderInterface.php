@@ -9,11 +9,6 @@ namespace Spryker\Client\StorageDatabase\Storage\Reader;
 
 interface StorageReaderInterface
 {
-    /**
-     * @param string $resourceKey
-     *
-     * @return string
-     */
     public function get(string $resourceKey): string;
 
     /**

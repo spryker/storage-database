@@ -30,11 +30,6 @@ class MySqlStorageReader extends AbstractStorageReader
         HAVING resource_data IS NOT NULL
     ';
 
-    /**
-     * @param string $resourceKey
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function createSingleSelectStatementForResourceKey(string $resourceKey): StatementInterface
     {
         $tableName = $this->tableNameResolver->resolveByResourceKey($resourceKey);
@@ -46,11 +41,6 @@ class MySqlStorageReader extends AbstractStorageReader
         return $statement;
     }
 
-    /**
-     * @param array $resourceKeys
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function createMultiSelectStatementForResourceKeys(array $resourceKeys): StatementInterface
     {
         $queryDataPerTable = $this->prepareMultiTableQueryData($resourceKeys);
@@ -81,11 +71,6 @@ class MySqlStorageReader extends AbstractStorageReader
         return $multiTableQueryData;
     }
 
-    /**
-     * @param array $queryDataPerTable
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function buildMultiTableSelectStatement(array $queryDataPerTable): StatementInterface
     {
         $selectFragments = [];
@@ -125,13 +110,6 @@ class MySqlStorageReader extends AbstractStorageReader
         return $statement;
     }
 
-    /**
-     * @param string $tableName
-     * @param string $keyPlaceholder
-     * @param string $aliasKeyPlaceholder
-     *
-     * @return string
-     */
     protected function buildSelectQuerySql(
         string $tableName,
         string $keyPlaceholder = self::DEFAULT_PLACEHOLDER_KEY,
@@ -145,31 +123,16 @@ class MySqlStorageReader extends AbstractStorageReader
         );
     }
 
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
     protected function formatKeyAsMySqlSearchPath(string $key): string
     {
         return sprintf('$."%s"', $key);
     }
 
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
     protected function buildKeyPlaceholder(int $index = 0): string
     {
         return static::DEFAULT_PLACEHOLDER_KEY . $index;
     }
 
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
     protected function buildAliasKeysPlaceholder(int $index = 0): string
     {
         return static::DEFAULT_PLACEHOLDER_ALIAS_KEY . $index;

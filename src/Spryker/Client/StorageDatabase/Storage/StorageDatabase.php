@@ -57,10 +57,6 @@ class StorageDatabase implements StorageDatabaseInterface
      */
     protected $utilEncodingService;
 
-    /**
-     * @param \Spryker\Client\StorageDatabase\Dependency\Service\StorageDatabaseToUtilEncodingInterface $utilEncodingService
-     * @param \Spryker\Client\StorageDatabaseExtension\Dependency\Plugin\StorageReaderPluginInterface $storageReaderPlugin
-     */
     public function __construct(StorageDatabaseToUtilEncodingInterface $utilEncodingService, StorageReaderPluginInterface $storageReaderPlugin)
     {
         $this->utilEncodingService = $utilEncodingService;
@@ -119,9 +115,6 @@ class StorageDatabase implements StorageDatabaseInterface
         return $results;
     }
 
-    /**
-     * @return void
-     */
     public function resetAccessStats(): void
     {
         $this->accessStats = [
@@ -134,101 +127,54 @@ class StorageDatabase implements StorageDatabaseInterface
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getAccessStats(): array
     {
         return $this->accessStats;
     }
 
-    /**
-     * @param bool $debug
-     *
-     * @return void
-     */
     public function setDebug(bool $debug): void
     {
         $this->debug = $debug;
     }
 
-    /**
-     * @param string $key
-     * @param string $value
-     * @param int|null $ttl
-     *
-     * @return void
-     */
     public function set(string $key, string $value, ?int $ttl = null): void
     {
     }
 
-    /**
-     * @param array $items
-     *
-     * @return void
-     */
     public function setMulti(array $items): void
     {
     }
 
-    /**
-     * @param string $key
-     *
-     * @return int
-     */
     public function delete(string $key): int
     {
         return 0;
     }
 
-    /**
-     * @param array $keys
-     *
-     * @return int
-     */
     public function deleteMulti(array $keys): int
     {
         return 0;
     }
 
-    /**
-     * @return int
-     */
     public function deleteAll(): int
     {
         return 0;
     }
 
-    /**
-     * @return array
-     */
     public function getStats(): array
     {
         return [];
     }
 
-    /**
-     * @return array
-     */
     public function getAllKeys(): array
     {
         return [];
     }
 
-    /**
-     * @param string $pattern
-     *
-     * @return array
-     */
     public function getKeys(string $pattern): array
     {
         return [];
     }
 
-    /**
-     * @return int
-     */
     public function getCountItems(): int
     {
         return 0;
@@ -250,21 +196,11 @@ class StorageDatabase implements StorageDatabaseInterface
         return $prefixedKeys;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
     protected function getPrefixedKeyName(string $key): string
     {
         return sprintf('%s%s', static::KV_PREFIX, $key);
     }
 
-    /**
-     * @param string $key
-     *
-     * @return void
-     */
     protected function addReadAccessStats(string $key): void
     {
         if ($this->debug) {

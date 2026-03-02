@@ -30,9 +30,6 @@ class StorageTableNameResolverTest extends Unit
      */
     protected $storageTableNameResolver;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -72,17 +69,11 @@ class StorageTableNameResolverTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function setupStorageTableNameResolver(): void
     {
         $this->storageTableNameResolver = new StorageTableNameResolver($this->tester->getModuleConfig());
     }
 
-    /**
-     * @return void
-     */
     protected function setupConfig(): void
     {
         $this->tester->mockConfigMethod('getResourceNameToStorageTableMap', [

@@ -48,9 +48,6 @@ class StorageDatabaseTest extends Unit
      */
     protected $storageDatabase;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -58,9 +55,6 @@ class StorageDatabaseTest extends Unit
         $this->setupStorageDatabase();
     }
 
-    /**
-     * @return void
-     */
     public function testGetReadsFromStorage(): void
     {
         $dummyKey = static::DUMMY_KEY;
@@ -92,9 +86,6 @@ class StorageDatabaseTest extends Unit
         $this->assertEquals($expectedResult, $result);
     }
 
-    /**
-     * @return array
-     */
     public function getReturnsDecodedResultWhenPresentProvider(): array
     {
         return [
@@ -104,9 +95,6 @@ class StorageDatabaseTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     public function testGetReturnsNullWhenEmptyResult(): void
     {
         $this->storageReaderPluginMock
@@ -116,9 +104,6 @@ class StorageDatabaseTest extends Unit
         $this->assertNull($this->storageDatabase->get(static::DUMMY_KEY));
     }
 
-    /**
-     * @return void
-     */
     public function testGetMultiReturnsEmptyArrayWhenNoKeys(): void
     {
         $result = $this->storageDatabase->getMulti([]);
@@ -127,9 +112,6 @@ class StorageDatabaseTest extends Unit
         $this->assertEmpty($result);
     }
 
-    /**
-     * @return void
-     */
     public function testGetMultiReturnsResultWithPrefixedKeys(): void
     {
         $this->storageReaderPluginMock
@@ -141,9 +123,6 @@ class StorageDatabaseTest extends Unit
         $this->assertEquals($this->getMultiResultWithPrefixedKeys(), $this->storageDatabase->getMulti(['key1', 'key2']));
     }
 
-    /**
-     * @return void
-     */
     public function testAddsReadAccessStatsForGetWhenDebugEnabled(): void
     {
         // Arrange
@@ -159,9 +138,6 @@ class StorageDatabaseTest extends Unit
         $this->assertSame(static::DUMMY_KEY, $accessStats['keys']['read'][0]);
     }
 
-    /**
-     * @return void
-     */
     public function testCanResetAccessStats(): void
     {
         // Arrange
@@ -177,9 +153,6 @@ class StorageDatabaseTest extends Unit
         $this->assertEquals($this->getEmptyAccessStats(), $this->storageDatabase->getAccessStats());
     }
 
-    /**
-     * @return void
-     */
     public function testDoesntAddReadAccessStatsForGetWhenDebugDisabled(): void
     {
         // Arrange
@@ -193,9 +166,6 @@ class StorageDatabaseTest extends Unit
         $this->assertEquals($this->getEmptyAccessStats(), $accessStats);
     }
 
-    /**
-     * @return array
-     */
     protected function getMultiResultWithPrefixedKeys(): array
     {
         $multiResult = $this->getMultiResult();
@@ -208,9 +178,6 @@ class StorageDatabaseTest extends Unit
         return array_combine($prefixedKeys, $multiResult);
     }
 
-    /**
-     * @return array
-     */
     protected function getMultiResult(): array
     {
         return [
@@ -219,19 +186,11 @@ class StorageDatabaseTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function setupStorageReaderPluginMock(): void
     {
         $this->storageReaderPluginMock = $this->createMock(StorageReaderPluginInterface::class);
     }
 
-    /**
-     * @param array $accessStats
-     *
-     * @return void
-     */
     protected function setAccessStats(array $accessStats): void
     {
         $storageDatabaseReflection = new ReflectionClass(StorageDatabase::class);
@@ -240,9 +199,6 @@ class StorageDatabaseTest extends Unit
         $accessStatsReflection->setValue($this->storageDatabase, $accessStats);
     }
 
-    /**
-     * @return array
-     */
     protected function getEmptyAccessStats(): array
     {
         return [
@@ -255,9 +211,6 @@ class StorageDatabaseTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function setupStorageDatabase(): void
     {
         $this->storageDatabase = new StorageDatabase(
@@ -266,9 +219,6 @@ class StorageDatabaseTest extends Unit
         );
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\Dependency\Service\StorageDatabaseToUtilEncodingInterface
-     */
     protected function createUtilEncodingService(): StorageDatabaseToUtilEncodingInterface
     {
         return new StorageDatabaseToUtilEncodingBridge(

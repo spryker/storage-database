@@ -33,11 +33,6 @@ class PostgreSqlStorageReader extends AbstractStorageReader
         WHERE storage.resource_data IS NOT NULL
     ';
 
-    /**
-     * @param string $resourceKey
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function createSingleSelectStatementForResourceKey(string $resourceKey): StatementInterface
     {
         $tableName = $this->tableNameResolver->resolveByResourceKey($resourceKey);
@@ -48,11 +43,6 @@ class PostgreSqlStorageReader extends AbstractStorageReader
         return $statement;
     }
 
-    /**
-     * @param array $resourceKeys
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function createMultiSelectStatementForResourceKeys(array $resourceKeys): StatementInterface
     {
         $queryDataPerTable = $this->prepareMultiTableQueryData($resourceKeys);
@@ -79,11 +69,6 @@ class PostgreSqlStorageReader extends AbstractStorageReader
         return $multiTableQueryData;
     }
 
-    /**
-     * @param array $queryDataPerTable
-     *
-     * @return \Propel\Runtime\Connection\StatementInterface
-     */
     protected function buildMultiTableSelectStatement(array $queryDataPerTable): StatementInterface
     {
         $selectFragments = [];
@@ -122,12 +107,6 @@ class PostgreSqlStorageReader extends AbstractStorageReader
         return $statement;
     }
 
-    /**
-     * @param string $tableName
-     * @param string $keyPlaceholder
-     *
-     * @return string
-     */
     protected function buildSelectQuerySql(string $tableName, string $keyPlaceholder = self::DEFAULT_PLACEHOLDER_KEY): string
     {
         return sprintf(
@@ -137,11 +116,6 @@ class PostgreSqlStorageReader extends AbstractStorageReader
         );
     }
 
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
     protected function buildKeyPlaceholder(int $index = 0): string
     {
         return sprintf(':%s%d', static::FIELD_KEY, $index);

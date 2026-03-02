@@ -147,9 +147,6 @@ class StorageDatabaseConfig extends AbstractBundleConfig
         ];
     }
 
-    /**
-     * @return string
-     */
     protected function getDsn(): string
     {
         return sprintf(

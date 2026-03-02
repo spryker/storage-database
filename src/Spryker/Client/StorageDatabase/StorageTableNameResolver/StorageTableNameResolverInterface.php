@@ -9,10 +9,5 @@ namespace Spryker\Client\StorageDatabase\StorageTableNameResolver;
 
 interface StorageTableNameResolverInterface
 {
-    /**
-     * @param string $resourceKey
-     *
-     * @return string
-     */
     public function resolveByResourceKey(string $resourceKey): string;
 }

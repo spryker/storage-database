@@ -28,11 +28,6 @@ class StorageDatabaseDependencyProvider extends AbstractDependencyProvider
      */
     public const PLUGIN_STORAGE_READER_PROVIDER = 'PLUGIN_STORAGE_READER_PROVIDER';
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     public function provideServiceLayerDependencies(Container $container): Container
     {
         $container = $this->addUtilEncodingService($container);
@@ -41,11 +36,6 @@ class StorageDatabaseDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addUtilEncodingService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
@@ -55,11 +45,6 @@ class StorageDatabaseDependencyProvider extends AbstractDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
-     * @return \Spryker\Client\Kernel\Container
-     */
     protected function addStorageReaderProviderPlugin(Container $container): Container
     {
         $container->set(static::PLUGIN_STORAGE_READER_PROVIDER, function (Container $container) {

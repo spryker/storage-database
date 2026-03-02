@@ -206,9 +206,6 @@ class StorageDatabaseClient extends AbstractClient implements StorageDatabaseCli
         return $this->getStorageDatabase()->getCountItems();
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\Storage\StorageDatabaseInterface
-     */
     protected function getStorageDatabase(): StorageDatabaseInterface
     {
         if (static::$storageDatabase === null) {

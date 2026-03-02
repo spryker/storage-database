@@ -28,20 +28,12 @@ EOT;
      */
     protected $resourceNameToStorageTableMap;
 
-    /**
-     * @param \Spryker\Client\StorageDatabase\StorageDatabaseConfig $config
-     */
     public function __construct(StorageDatabaseConfig $config)
     {
         $this->config = $config;
         $this->resourceNameToStorageTableMap = $config->getResourceNameToStorageTableMap();
     }
 
-    /**
-     * @param string $resourceKey
-     *
-     * @return string
-     */
     public function resolveByResourceKey(string $resourceKey): string
     {
         $resourceName = $this->getResourceNameFromKey($resourceKey);
@@ -49,11 +41,6 @@ EOT;
         return $this->getStorageTableNameByResourceName($resourceName);
     }
 
-    /**
-     * @param string $resourceKey
-     *
-     * @return string
-     */
     protected function getResourceNameFromKey(string $resourceKey): string
     {
         [$resourceName] = explode(':', $resourceKey);
@@ -61,11 +48,6 @@ EOT;
         return $resourceName;
     }
 
-    /**
-     * @param string $resourceName
-     *
-     * @return string
-     */
     protected function getStorageTableNameByResourceName(string $resourceName): string
     {
         $storageTableName = $this->getStorageTableName($resourceName);
@@ -80,21 +62,11 @@ EOT;
         ]));
     }
 
-    /**
-     * @param string $resourceName
-     *
-     * @return bool
-     */
     protected function isResourceNameNeedsMapping(string $resourceName): bool
     {
         return array_key_exists($resourceName, $this->resourceNameToStorageTableMap);
     }
 
-    /**
-     * @param string $resourceName
-     *
-     * @return string
-     */
     protected function getStorageTablePrefix(string $resourceName): string
     {
         $storageTableNameParts = $this->getStorageTableNamePartsForResourceName($resourceName);
@@ -102,11 +74,6 @@ EOT;
         return $storageTableNameParts[SharedStorageDatabaseConfig::KEY_STORAGE_TABLE_PREFIX] ?? $this->config->getDefaultStorageTablePrefix();
     }
 
-    /**
-     * @param string $resourceName
-     *
-     * @return string
-     */
     protected function getStorageTableSuffix(string $resourceName): string
     {
         $storageTableNameParts = $this->getStorageTableNamePartsForResourceName($resourceName);

@@ -40,17 +40,11 @@ class ConnectionProvider implements ConnectionProviderInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Client\StorageDatabase\StorageDatabaseConfig $config
-     */
     public function __construct(StorageDatabaseConfig $config)
     {
         $this->config = $config;
     }
 
-    /**
-     * @return \Propel\Runtime\Connection\ConnectionInterface
-     */
     public function getConnection(): ConnectionInterface
     {
         if (!static::$connection) {
@@ -61,9 +55,6 @@ class ConnectionProvider implements ConnectionProviderInterface
         return static::$connection;
     }
 
-    /**
-     * @return void
-     */
     protected function establishConnection(): void
     {
         $serviceContainer = $this->getServiceContainer();
@@ -77,9 +68,6 @@ class ConnectionProvider implements ConnectionProviderInterface
         $this->setupConnection();
     }
 
-    /**
-     * @return \Propel\Runtime\Connection\ConnectionManagerInterface
-     */
     protected function createConnectionManager(): ConnectionManagerInterface
     {
         $connectionManager = new ConnectionManagerSingle(static::CONNECTION_NAME);
@@ -88,9 +76,6 @@ class ConnectionProvider implements ConnectionProviderInterface
         return $connectionManager;
     }
 
-    /**
-     * @return \Propel\Runtime\ServiceContainer\StandardServiceContainer
-     */
     protected function getServiceContainer(): StandardServiceContainer
     {
         /** @var \Propel\Runtime\ServiceContainer\StandardServiceContainer $serviceContainer */

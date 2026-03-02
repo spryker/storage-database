@@ -30,9 +30,6 @@ class StorageDatabaseClientTester extends Actor
 {
     use _generated\StorageDatabaseClientTesterActions;
 
-    /**
-     * @return void
-     */
     public function setupStorageReaderPlugins(): void
     {
         $this->setDependency(StorageDatabaseDependencyProvider::PLUGIN_STORAGE_READER_PROVIDER, new PostgreSqlStorageReaderPlugin());

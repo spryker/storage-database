@@ -11,8 +11,5 @@ use Propel\Runtime\Connection\ConnectionInterface;
 
 interface ConnectionProviderInterface
 {
-    /**
-     * @return \Propel\Runtime\Connection\ConnectionInterface
-     */
     public function getConnection(): ConnectionInterface;
 }

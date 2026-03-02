@@ -25,9 +25,6 @@ use Spryker\Client\StorageDatabaseExtension\Dependency\Plugin\StorageReaderPlugi
  */
 class StorageDatabaseFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Client\StorageDatabase\Connection\ConnectionProviderInterface
-     */
     public function createConnectionProvider(): ConnectionProviderInterface
     {
         return new ConnectionProvider(
@@ -35,9 +32,6 @@ class StorageDatabaseFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\Storage\StorageDatabaseInterface
-     */
     public function createStorageDatabase(): StorageDatabaseInterface
     {
         return new StorageDatabase(
@@ -46,9 +40,6 @@ class StorageDatabaseFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\StorageTableNameResolver\StorageTableNameResolverInterface
-     */
     public function createStorageTableNameResolver(): StorageTableNameResolverInterface
     {
         return new StorageTableNameResolver(
@@ -56,9 +47,6 @@ class StorageDatabaseFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\Storage\Reader\StorageReaderInterface
-     */
     public function createPostgreSqlStorageReader(): StorageReaderInterface
     {
         return new PostgreSqlStorageReader(
@@ -67,9 +55,6 @@ class StorageDatabaseFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\Storage\Reader\StorageReaderInterface
-     */
     public function createMySqlStorageReader(): StorageReaderInterface
     {
         return new MySqlStorageReader(
@@ -78,17 +63,11 @@ class StorageDatabaseFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabase\Dependency\Service\StorageDatabaseToUtilEncodingInterface
-     */
     public function getUtilEncodingService(): StorageDatabaseToUtilEncodingInterface
     {
         return $this->getProvidedDependency(StorageDatabaseDependencyProvider::SERVICE_UTIL_ENCODING);
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabaseExtension\Dependency\Plugin\StorageReaderPluginInterface
-     */
     public function getStorageReaderPlugin(): StorageReaderPluginInterface
     {
         return $this->getProvidedDependency(StorageDatabaseDependencyProvider::PLUGIN_STORAGE_READER_PROVIDER);

@@ -28,18 +28,12 @@ class ConnectionProviderTest extends Unit
      */
     protected $connectionProvider;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
         $this->setupConnectionProvider();
     }
 
-    /**
-     * @return void
-     */
     public function testProvidesConnection(): void
     {
         $connection = $this->connectionProvider->getConnection();
@@ -47,9 +41,6 @@ class ConnectionProviderTest extends Unit
         $this->assertInstanceOf(ConnectionInterface::class, $connection);
     }
 
-    /**
-     * @return void
-     */
     public function testProvidesTheSameConnectionInstanceOnSubsequentCalls(): void
     {
         $connection = $this->connectionProvider->getConnection();
@@ -58,9 +49,6 @@ class ConnectionProviderTest extends Unit
         $this->assertSame($connection, $anotherConnection);
     }
 
-    /**
-     * @return void
-     */
     protected function setupConnectionProvider(): void
     {
         $this->connectionProvider = (new StorageDatabaseFactory())->createConnectionProvider();

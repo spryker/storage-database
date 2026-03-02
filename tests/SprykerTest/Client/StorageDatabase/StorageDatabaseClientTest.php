@@ -123,9 +123,6 @@ class StorageDatabaseClientTest extends Unit
      */
     protected $storageDatabaseClient;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -138,9 +135,6 @@ class StorageDatabaseClientTest extends Unit
         $this->storageDatabaseClient = new StorageDatabaseClient();
     }
 
-    /**
-     * @return void
-     */
     public function testDataCanBeRetrievedBySingleKey(): void
     {
         // Arrange
@@ -154,9 +148,6 @@ class StorageDatabaseClientTest extends Unit
         $this->assertSingleKeyResult($rowId, $result);
     }
 
-    /**
-     * @return void
-     */
     public function testDataCanBeRetrievedByMultipleKeys(): void
     {
         // Arrange
@@ -174,9 +165,6 @@ class StorageDatabaseClientTest extends Unit
         $this->assertMultipleKeyResults([$rowId, $anotherRowId], $result);
     }
 
-    /**
-     * @return void
-     */
     public function testDataCanBeRetrievedBySingleAliasKey(): void
     {
         // Arrange
@@ -190,9 +178,6 @@ class StorageDatabaseClientTest extends Unit
         $this->assertSingleAliasKeyResult($rowKey, $aliasKey, $result);
     }
 
-    /**
-     * @return void
-     */
     public function testDataCanBeRetrievedByMultipleAliasKeys(): void
     {
         // Arrange
@@ -210,9 +195,6 @@ class StorageDatabaseClientTest extends Unit
         $this->assertMultipleAliasKeyResults($aliasKeys, $result);
     }
 
-    /**
-     * @return void
-     */
     public function testAccessStatsAreUpdated(): void
     {
         $this->storageDatabaseClient->setDebug(true);
@@ -227,23 +209,11 @@ class StorageDatabaseClientTest extends Unit
         $this->assertEmpty(array_diff([static::FIRST_DUMMY_KEY, static::SECOND_DUMMY_KEY, static::THIRD_DUMMY_KEY], $this->storageDatabaseClient->getAccessStats()['keys']['read']));
     }
 
-    /**
-     * @param string $rowId
-     * @param array $result
-     *
-     * @return void
-     */
     protected function assertSingleKeyResult(string $rowId, array $result): void
     {
         $this->assertEquals($this->fixtureDataSet[$rowId][StorageDatabaseHelper::COLUMN_DATA], $result);
     }
 
-    /**
-     * @param array $rowIds
-     * @param array $result
-     *
-     * @return void
-     */
     protected function assertMultipleKeyResults(array $rowIds, array $result): void
     {
         $this->assertSame(count($rowIds), count($result), 'Number of data sets returned does not match the number of keys, used for search.');
@@ -256,25 +226,12 @@ class StorageDatabaseClientTest extends Unit
         }
     }
 
-    /**
-     * @param string $rowId
-     * @param string $aliasKey
-     * @param array $result
-     *
-     * @return void
-     */
     protected function assertSingleAliasKeyResult(string $rowId, string $aliasKey, array $result): void
     {
         $fixtureAliasKeysData = $this->fixtureDataSet[$rowId][StorageDatabaseHelper::COLUMN_ALIAS_KEYS];
         $this->assertEquals($fixtureAliasKeysData[$aliasKey], $result);
     }
 
-    /**
-     * @param array $aliasKeys
-     * @param array $result
-     *
-     * @return void
-     */
     protected function assertMultipleAliasKeyResults(array $aliasKeys, array $result): void
     {
         $this->assertSame(count($aliasKeys), count($result));
@@ -293,11 +250,6 @@ class StorageDatabaseClientTest extends Unit
         }
     }
 
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
     protected function getPrefixedKey(string $key): string
     {
         return static::KEY_PREFIX . $key;
@@ -322,9 +274,6 @@ class StorageDatabaseClientTest extends Unit
         return null;
     }
 
-    /**
-     * @return void
-     */
     protected function setUpDependencies(): void
     {
         $this->tester->setDependency(QueueDependencyProvider::QUEUE_ADAPTERS, function (Container $container) {
@@ -339,9 +288,6 @@ class StorageDatabaseClientTest extends Unit
         });
     }
 
-    /**
-     * @return \Spryker\Client\StorageDatabaseExtension\Dependency\Plugin\StorageReaderPluginInterface
-     */
     protected function getStorageReaderProviderPlugin(): StorageReaderPluginInterface
     {
         if (Config::get(StorageDatabaseConstants::DB_ENGINE) === StorageDatabaseConfig::DB_ENGINE_MYSQL) {
@@ -351,9 +297,6 @@ class StorageDatabaseClientTest extends Unit
         return new PostgreSqlStorageReaderPlugin();
     }
 
-    /**
-     * @return void
-     */
     protected function populateFixtureTable(): void
     {
         if (static::$isFixtureTableInitialized) {

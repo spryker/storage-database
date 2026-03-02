@@ -64,9 +64,6 @@ class StorageDatabaseHelper extends Module
         $this->createFixtureStorageTable();
     }
 
-    /**
-     * @return void
-     */
     public function _afterSuite(): void
     {
         parent::_afterSuite();
@@ -100,9 +97,6 @@ class StorageDatabaseHelper extends Module
         ]);
     }
 
-    /**
-     * @return void
-     */
     protected function createFixtureStorageTable(): void
     {
         $query = sprintf(
@@ -120,9 +114,6 @@ class StorageDatabaseHelper extends Module
         $this->getConnection()->exec($query);
     }
 
-    /**
-     * @return void
-     */
     protected function dropFixtureStorageTable(): void
     {
         $query = sprintf('DROP TABLE IF EXISTS %s', static::FIXTURE_TABLE_NAME);
@@ -130,9 +121,6 @@ class StorageDatabaseHelper extends Module
         $this->getConnection()->exec($query);
     }
 
-    /**
-     * @return \PDO
-     */
     protected function getConnection(): PDO
     {
         if (!static::$pdoConnection) {
@@ -146,9 +134,6 @@ class StorageDatabaseHelper extends Module
         return static::$pdoConnection;
     }
 
-    /**
-     * @return string
-     */
     protected function getDatabaseSourceName(): string
     {
         return sprintf(
@@ -160,11 +145,6 @@ class StorageDatabaseHelper extends Module
         );
     }
 
-    /**
-     * @param array $value
-     *
-     * @return string
-     */
     public function encodeJson(array $value): string
     {
         return (new UtilEncodingService())->encodeJson($value) ?? '';
@@ -180,11 +160,6 @@ class StorageDatabaseHelper extends Module
         return (new UtilEncodingService())->decodeJson($value, true);
     }
 
-    /**
-     * @param string $fieldName
-     *
-     * @return string
-     */
     protected function getEscapedFieldName(string $fieldName): string
     {
         if (Config::get(PropelConstants::ZED_DB_ENGINE) == PropelConfig::DB_ENGINE_MYSQL) {
