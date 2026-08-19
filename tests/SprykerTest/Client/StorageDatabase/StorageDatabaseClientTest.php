@@ -165,6 +165,23 @@ class StorageDatabaseClientTest extends Unit
         $this->assertMultipleKeyResults([$rowId, $anotherRowId], $result);
     }
 
+    public function testGivenAKeyListIndexedByStringsWhenTheKeysAreReadAtOnceThenEachResolvesToItsOwnData(): void
+    {
+        // Arrange
+        $rowId = static::FIRST_FIXTURE_ROW;
+        $anotherRowId = static::SECOND_FIXTURE_ROW;
+        $keysIndexedByStrings = [
+            $rowId => $this->fixtureDataSet[$rowId][StorageDatabaseHelper::COLUMN_KEY],
+            $anotherRowId => $this->fixtureDataSet[$anotherRowId][StorageDatabaseHelper::COLUMN_KEY],
+        ];
+
+        // Act
+        $result = $this->storageDatabaseClient->getMulti($keysIndexedByStrings);
+
+        // Assert
+        $this->assertMultipleKeyResults([$rowId, $anotherRowId], $result);
+    }
+
     public function testDataCanBeRetrievedBySingleAliasKey(): void
     {
         // Arrange

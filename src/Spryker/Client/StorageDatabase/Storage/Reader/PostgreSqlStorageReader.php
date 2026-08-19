@@ -60,7 +60,8 @@ class PostgreSqlStorageReader extends AbstractStorageReader
     {
         $multiTableQueryData = [];
 
-        foreach ($resourceKeys as $index => $resourceKey) {
+        // Callers index their key list by whatever their domain uses, so the placeholder ordinal must come from the position.
+        foreach (array_values($resourceKeys) as $index => $resourceKey) {
             $tableName = $this->tableNameResolver->resolveByResourceKey($resourceKey);
             $keyPlaceholder = $this->buildKeyPlaceholder($index);
             $multiTableQueryData[$tableName][$keyPlaceholder] = $resourceKey;
