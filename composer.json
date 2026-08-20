@@ -17,12 +17,14 @@
         "spryker/config": "*",
         "spryker/propel": "*",
         "spryker/queue": "*",
+        "spryker/storage": "*",
         "spryker/testify": "*"
     },
     "autoload": {
         "psr-4": {
             "Spryker\\": "src/Spryker/",
-            "SprykerTest\\Client\\StorageDatabase\\Helper\\": "tests/SprykerTest/Client/StorageDatabase/_support/Helper/"
+            "SprykerTest\\Client\\StorageDatabase\\Helper\\": "tests/SprykerTest/Client/StorageDatabase/_support/Helper/",
+            "SprykerTest\\Client\\StorageDatabase\\Sqlite\\": "tests/SprykerTest/Client/StorageDatabase/_support/Sqlite/"
         }
     },
     "autoload-dev": {
