@@ -195,7 +195,6 @@ class StorageDatabaseTest extends Unit
     {
         $storageDatabaseReflection = new ReflectionClass(StorageDatabase::class);
         $accessStatsReflection = $storageDatabaseReflection->getProperty('accessStats');
-        $accessStatsReflection->setAccessible(true);
         $accessStatsReflection->setValue($this->storageDatabase, $accessStats);
     }
 
