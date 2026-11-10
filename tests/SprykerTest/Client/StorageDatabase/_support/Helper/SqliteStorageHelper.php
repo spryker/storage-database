@@ -11,11 +11,15 @@ namespace SprykerTest\Client\StorageDatabase\Helper;
 
 use Codeception\Module;
 use Codeception\TestInterface;
+use Spryker\Client\Storage\StorageClient;
 use Spryker\Client\Storage\StorageDependencyProvider;
+use Spryker\Client\Storage\StorageFactory;
 use Spryker\Client\StorageDatabase\Plugin\StorageDatabasePlugin;
+use Spryker\Client\StorageDatabase\StorageDatabaseClient;
 use Spryker\Client\StorageDatabase\StorageDatabaseDependencyProvider;
 use SprykerTest\Client\StorageDatabase\Sqlite\SqliteStorageReaderPlugin;
 use SprykerTest\Shared\Testify\Helper\DependencyHelperTrait;
+use SprykerTest\Shared\Testify\Helper\StaticVariablesHelper;
 
 /**
  * Points the Storage client at the database instead of Redis, so storage-backed resources can be
@@ -31,16 +35,30 @@ use SprykerTest\Shared\Testify\Helper\DependencyHelperTrait;
 class SqliteStorageHelper extends Module
 {
     use DependencyHelperTrait;
+    use StaticVariablesHelper;
 
     public function _before(TestInterface $test): void
     {
+        $this->cleanupStorageServices();
         $this->bindStoragePlugins();
     }
 
-    /**
-     * Rebinding per test rather than once per suite: the container is reset between methods, so a
-     * binding made at suite level would not survive into the second test.
-     */
+    public function _after(TestInterface $test): void
+    {
+        // The storage client and factory hold the storage service statically; unrestored, the SQLite reader serves every later suite.
+        $this->resetStaticCaches();
+        $this->staticDefinitions = [];
+        (new StorageClient())->resetCache();
+    }
+
+    protected function cleanupStorageServices(): void
+    {
+        $this->cleanupStaticCache(StorageClient::class, 'service');
+        $this->cleanupStaticCache(StorageFactory::class, 'storageService');
+        $this->cleanupStaticCache(StorageDatabaseClient::class, 'storageDatabase');
+        (new StorageClient())->resetCache();
+    }
+
     protected function bindStoragePlugins(): void
     {
         $this->getDependencyHelper()->setDependency(
